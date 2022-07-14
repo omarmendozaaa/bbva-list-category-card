@@ -44,19 +44,25 @@ export class BbvaListCategoryCard extends LitElement {
       getComponentSharedStyles('bbva-list-category-card-shared-styles')
     ];
   }
-
+  _selectCatEvent(item){
+    this.dispatchEvent(new CustomEvent('select-category-event'),{
+      bubbles: true,
+      composed: true,
+      detail: item.id
+    });
+  }
   // Define a template
   render() {
     return this.isdetail ?
     html`
     <ul class="list-group list-group-horizontal">
     ${this.categoryList.map((category) => html`
-          <bbva-category-card-bs .category=${category} .isdetail=${this.isdetail}></bbva-category-card-bs>
+          <bbva-category-card-bs .category=${category} .isdetail=${this.isdetail} @id-category-event=${() => this._selectCatEvent(category)}></bbva-category-card-bs>
         `)}
     </ul>
     `: html`<div class="row row-cols-md-4 row-cols-sm-3 row-cols-1 justify-content-center">
         ${this.categoryList.map((category) => html`
-          <bbva-category-card-bs .category=${category} .isdetail=${this.isdetail}></bbva-category-card-bs>
+          <bbva-category-card-bs .category=${category} .isdetail=${this.isdetail} @id-category-event=${() => this._selectCatEvent(category)}></bbva-category-card-bs>
         `)}
       </div>`;
   }
