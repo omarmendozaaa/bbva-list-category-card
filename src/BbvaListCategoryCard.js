@@ -22,7 +22,7 @@ export class BbvaListCategoryCard extends LitElement {
     return 'bbva-list-category-card';
   }
   getData(data){
-    this.categoryList = data;
+    this.categoryList = data.genres;
   }
   // Declare properties
   static get properties() {
@@ -50,12 +50,12 @@ export class BbvaListCategoryCard extends LitElement {
     return this.isdetail ?
     html`
     <ul class="list-group list-group-horizontal">
-    ${this.categoryList.genres.map((category) => html`
+    ${this.categoryList.map((category) => html`
           <bbva-category-card-bs .category=${category} .isdetail=${this.isdetail}></bbva-category-card-bs>
         `)}
     </ul>
     `: html`<div class="row row-cols-md-4 row-cols-sm-3 row-cols-1 justify-content-center">
-        ${this.categoryList.genres.map((category) => html`
+        ${this.categoryList.map((category) => html`
           <bbva-category-card-bs .category=${category} .isdetail=${this.isdetail}></bbva-category-card-bs>
         `)}
       </div>`;
